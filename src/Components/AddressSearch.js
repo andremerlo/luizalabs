@@ -31,6 +31,16 @@ class AddressSearchResult extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            visible: false
+        };
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.searchResult !== prevProps.searchResult) {
+            this.setState({visible: this.props.searchResult != null});
+        }
     }
 
     render() {
@@ -50,15 +60,17 @@ class AddressSearchResult extends Component {
                 </div>
             )
         } else {
-            let address = {
+            const address = {
                 street: searchResult.logradouro,
                 neighborhood: searchResult.bairro,
                 city: searchResult.localidade,
                 state: searchResult.uf,
                 zipCode: searchResult.cep,
-            }
+            };
+
             el = (
-                <div className="address-result-success">
+                <div className="address-result-success" >
+                    <button className="close-button" onClick={(event) => this.handleClose(event)}>X</button>
                     <AddressInfo address={address}/>
                     <div className="address-map-wrapper">
                         <AddressMap searchResult={this.props.searchResult}/>
@@ -67,12 +79,23 @@ class AddressSearchResult extends Component {
             )
         }
 
+        const style = {
+            display: this.state.visible ? 'block' : 'none'
+        }
+
         return (
-            <div className="address-search-result">
+            <div className="address-search-result" style={style}>
                 {el}
             </div>
         );
     }
+
+    handleClose(e) {
+        this.setState({
+            visible: false
+        });
+    }
+
 }
 
 class AddressSearchBar extends Component {

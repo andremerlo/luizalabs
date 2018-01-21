@@ -62,11 +62,23 @@
     padding: 20px;
     border: solid 2px #efefef;
     margin: 4px 0px;
+    position: relative;
+}
+
+.address-search-panel .address-search-result .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 15px;
+    width: 15px;
+    font-size: 8px;
+    padding: 0px;
+    cursor: pointer;
 }
 
 .address-search-panel .address-search-result .address-info {
     font-size: 1em;
-    margin: 15px 0px;
+    margin: 0px 0px 15px 0px;
     color: #585858;
 }
 

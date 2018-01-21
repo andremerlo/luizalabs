@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Panel from './Panel';
 import fetchJsonp from 'fetch-jsonp';
+import AddressMap from './AddressMap';
+import './AddressSearch.css';
 require('es6-promise').polyfill();
 
 class ErrorMessage extends Component {
@@ -30,17 +32,18 @@ class AddressSearchResult extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
 
         const searchResult = this.props.searchResult
 
-        if(!searchResult)
+        if (!searchResult)
             return null
 
         const error = searchResult.erro;
         let el = null;
 
-        if(error){
+        if (error) {
             el = (
                 <div className="address-result-error">
                     <ErrorMessage message="Endereço não encontrado para o CEP informado."/>
@@ -56,7 +59,10 @@ class AddressSearchResult extends Component {
             }
             el = (
                 <div className="address-result-success">
-                    <AddressInfo address={address} />
+                    <AddressInfo address={address}/>
+                    <div className="address-map-wrapper">
+                        <AddressMap searchResult={this.props.searchResult}/>
+                    </div>
                 </div>
             )
         }
@@ -85,10 +91,11 @@ class AddressSearchBar extends Component {
     render() {
         return (
             <div className="address-search-bar">
-                <p>Consultar</p>
-                <form onSubmit={(event) => this.handleSubmit(event)}>
+                <p className="address-search-bar-title">Consultar</p>
+                <form className="address-search-bar-form" onSubmit={(event) => this.handleSubmit(event)}>
                     <label>CEP</label>
-                    <input name="zipcode" value={this.state.zipcode} type="text" placeholder="00000-000"
+                    <input autoComplete="off" name="zipcode" value={this.state.zipcode} type="text"
+                           placeholder="00000-000"
                            onChange={(event) => this.handleChange(event)}/>
                     <button disabled={!this.state.isValid}>Buscar</button>
                 </form>
@@ -132,31 +139,33 @@ class AddressSearchBar extends Component {
 class AddressSearch extends Component {
     constructor(props) {
         super(props);
-        this.state = { searchResult: undefined }
+        this.state = {searchResult: undefined}
         this.handleSearch = this.handleSearch.bind(this);
     }
+
     render() {
         return (
-            <Panel title="Consultar Endereço"
+            <Panel title="Consulta de endereço"
                    className="address-search-panel">
                 <AddressSearchBar
-                    onSubmit={this.handleSearch} />
+                    onSubmit={this.handleSearch}/>
                 <AddressSearchResult searchResult={this.state.searchResult}/>
             </Panel>
         );
     }
+
     handleSearch(zipCode) {
 
         const cleanZipCode = zipCode.replace(/\D/g, '');
 
         fetchJsonp(`https://viacep.com.br/ws/${cleanZipCode}/json/`)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json()
             })
-            .then(function(json) {
+            .then(function (json) {
                 this.setState({searchResult: json})
             }.bind(this))
-            .catch(function(ex) {
+            .catch(function (ex) {
                 this.setState({searchResult: null})
             }.bind(this))
     }

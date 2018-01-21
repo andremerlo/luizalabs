@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import "./Panel.css";
+
 
 class PanelHeader extends Component {
     render() {

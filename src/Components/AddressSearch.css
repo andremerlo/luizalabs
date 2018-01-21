@@ -48,6 +48,10 @@
     transition: background-color 0.3s;
 }
 
+.address-search-panel .address-search-bar-form button:hover {
+    background-color: #3ac1ff;
+}
+
 .address-search-panel .address-search-bar-form button:disabled {
     background-color: #d8d8d8;
     /*color: #e6e6e6;*/
@@ -62,7 +66,7 @@
 
 .address-search-panel .address-search-result .address-info {
     font-size: 1em;
-    margin: 10px 0px;
+    margin: 15px 0px;
     color: #585858;
 }
 

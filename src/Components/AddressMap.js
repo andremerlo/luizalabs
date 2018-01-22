@@ -14,14 +14,14 @@ export class AddressMap extends Component {
         if (this.props && this.props.google && !this.map) {
             const {google} = this.props;
             const maps = google.maps;
-            const geocoder = new maps.Geocoder();
             const mapRef = this.refs.map;
             const node = ReactDOM.findDOMNode(mapRef);
             const mapConfig = Object.assign({}, {
                 center: {lat: 0, lng: 180},
                 zoom: 16,
-                gestureHandling: "cooperative",
-                mapTypeId: 'terrain'
+                disableDefaultUI: true,
+                draggable: false,
+                scrollwheel: false,
             })
             this.map = new maps.Map(node, mapConfig);
             this.marker = new google.maps.Marker({

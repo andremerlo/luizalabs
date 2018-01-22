@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Panel from './Panel';
 import fetchJsonp from 'fetch-jsonp';
 import AddressMap from './AddressMap';
+import MaskedInput from 'react-text-mask';
 import './AddressSearch.css';
 require('es6-promise').polyfill();
 
@@ -103,7 +104,7 @@ class AddressSearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            zipcode: '',
+            zipcode: this.props.zipcode,
             isValid: false,
         };
         this.zipRegex = /^[0-9]{5}-[0-9]{3}$/;
@@ -117,9 +118,13 @@ class AddressSearchBar extends Component {
                 <p className="address-search-bar-title">Consultar</p>
                 <form className="address-search-bar-form" onSubmit={(event) => this.handleSubmit(event)}>
                     <label>CEP</label>
-                    <input autoComplete="off" name="zipcode" value={this.state.zipcode} type="text"
-                           placeholder="00000-000"
-                           onChange={(event) => this.handleChange(event)}/>
+                    <MaskedInput type="tel"
+                                 autoComplete="off"
+                                 name="zipcode"
+                                 value={this.state.zipcode}
+                                 placeholder="00000-000"
+                                 onChange={(event) => this.handleChange(event)}
+                                 mask={[/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/, '-', /[0-9]/,/[0-9]/,/[0-9]/]}  />
                     <button disabled={!this.state.isValid}>Buscar</button>
                 </form>
             </div>
@@ -127,24 +132,7 @@ class AddressSearchBar extends Component {
     }
 
     handleChange(e) {
-
-        const re = /^[0-9]{1,5}$|^[0-9]{5}-[0-9]{0,3}$/;
-        const prevValue = this.state.zipcode;
-        const value = e.target.value;
-        let finalValue = value;
-
-        //aplica uma máscara enquanto digita
-        if ((prevValue.length < 5 && value.length >= 5)
-            || (prevValue.length === 5 && value.length > 5)) {
-            finalValue = value.substr(0, 5) + '-' + value.substr(5, 3);
-        } else if ((prevValue.length > 6 && value.length === 6)) {
-            finalValue = value.substr(0, 5);
-        }
-
-        if (finalValue === '' || re.test(finalValue)) {
-            this.setState({zipcode: finalValue}, this.validateInput);
-        }
-
+        this.setState({zipcode: e.target.value}, this.validateInput);
     }
 
     handleSubmit(e) {

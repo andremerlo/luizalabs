@@ -43,7 +43,8 @@ export class AddressMap extends Component {
                     this.map.setCenter(results[0].geometry.location);
                     this.marker.setPosition(results[0].geometry.location);
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                    alert('Não foi possível obter a localização, tente novamente');
                 }
             }.bind(this));
         }

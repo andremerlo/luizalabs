@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "fetch-jsonp": "^1.1.3",
+    "font-awesome": "^4.7.0",
     "google-maps-react": "^1.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

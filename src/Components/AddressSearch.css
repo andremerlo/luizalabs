@@ -85,11 +85,20 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    height: 20px;
-    width: 20px;
-    font-size: 8px;
+    font-size: 20px;
     padding: 0px;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    transition: color .3s;
+    color: #FFF;
+    text-shadow: -1px 0 #363636, 0 1px #363636, 1px 0 #363636, 0 -1px #363636;
+    outline: none;
+}
+
+
+.address-search-panel .address-search-result .close-button:hover {
+    color: #ee4d4d;
 }
 
 .address-search-panel .address-search-result .address-info {

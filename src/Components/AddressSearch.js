@@ -71,7 +71,9 @@ class AddressSearchResult extends Component {
 
             el = (
                 <div className="address-result-success" >
-                    <button className="close-button" onClick={(event) => this.handleClose(event)}>X</button>
+                    <button className="close-button" onClick={(event) => this.handleClose(event)}>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
                     <AddressInfo address={address}/>
                     <div className="address-map-wrapper">
                         <AddressMap searchResult={this.props.searchResult}/>

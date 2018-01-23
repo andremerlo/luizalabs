@@ -1,3 +1,10 @@
+/*
+ * Por questão de velocidade para desenvolver o teste, optei
+ * por não utilizar nenhum pre-processador CSS, porém
+ * possuo as habilidades necessárias para utilizar LESS ou
+ * SASS integrados ao webpack ou gulp
+ */
+
 body {
   margin: 0;
   padding: 0;

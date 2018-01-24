@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Panel from './Panel';
+import Panel from './Panel/index';
 import fetchJsonp from 'fetch-jsonp';
 import AddressMap from './AddressMap';
 import MaskedInput from 'react-text-mask';

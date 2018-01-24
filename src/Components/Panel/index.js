@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import "./Panel.css";
-
-
-class PanelHeader extends Component {
-    render() {
-        return (
-            <h1 className="panel-header">{this.props.title}</h1>
-        );
-    }
-}
+import PanelHeader from './PanelHeader';
+import PanelBody from './PanelBody';
 
 class Panel extends Component {
     render() {
         return (
             <div className={`panel ${this.props.className}`}>
                 <PanelHeader title={this.props.title} />
-                {this.props.children}
+                <PanelBody>
+                    {this.props.children}
+                </PanelBody>
             </div>
         );
     }

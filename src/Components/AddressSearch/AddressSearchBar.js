@@ -14,6 +14,10 @@ class AddressSearchBar extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        this.validateInput();
+    }
+
     render() {
         return (
             <div className="address-search-bar">

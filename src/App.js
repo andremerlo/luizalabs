@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import AddressSearch from './Components/AddressSearch';
+import AddressSearch from './Components/AddressSearch/';
 
 class App extends Component {
   render() {

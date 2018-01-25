@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {GoogleApiWrapper} from 'google-maps-react';
 
 export class AddressMap extends Component {
 
